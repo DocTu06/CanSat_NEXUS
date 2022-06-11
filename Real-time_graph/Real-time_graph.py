@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import serial
+import serial.tools.list_ports
 
 def isfloat(input):
     try:
@@ -9,6 +10,12 @@ def isfloat(input):
         return False
 comgood = 0
 file = open('LoRa.txt', "a")
+ports = list(serial.tools.list_ports.comports())
+for p in ports:
+    if 'CH340' in p.description:
+        print (p[1] + ' <--Probably receiver')
+    else:
+        print(p)
 while comgood == 0:
 
     try:
